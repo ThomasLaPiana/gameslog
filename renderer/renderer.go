@@ -1,5 +1,5 @@
 // / This is a custom renderer for gin-gonic that uses the templ package to render HTML components.
-package main
+package renderer
 
 import (
 	"context"

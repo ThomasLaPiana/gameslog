@@ -4,4 +4,6 @@ A website for tracking game backlogs.
 
 ## Development
 
-`watchexec -w . -c -r go run .`
+```sh
+watchexec --watch . --ignore '*_templ.go' --clear --restart 'templ generate ; go run .'
+```
