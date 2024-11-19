@@ -1,0 +1,13 @@
+package views
+
+import (
+    "gameslog/database"
+    "strconv"
+    "strings"
+)
+
+templ Game(game database.Game) {
+    <li><strong>Release Year: </strong>{strconv.Itoa(game.ReleaseYear)}</li>
+    <li><strong>Platforms: </strong>{strings.Join(game.Platforms, ", ")}</li>
+    <li><strong>Publisher: </strong>{game.Publisher}</li>
+}

@@ -1,0 +1,13 @@
+package views
+
+import "gameslog/database"
+
+templ Index(games []database.Game) {
+	<h1>Welcome to Gameslog!</h1>
+	for _, item := range games {
+		<h2>{item.Name}</h2>
+		<ul>
+		@Game(item)
+		</ul>
+	}
+}

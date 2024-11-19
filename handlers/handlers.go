@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"gameslog/database"
 	"gameslog/renderer"
 	"gameslog/views"
 )
@@ -14,16 +15,18 @@ func GetRouter() *gin.Engine {
 	ginHtmlRenderer := r.HTMLRender
 	r.HTMLRender = &renderer.HTMLTemplRenderer{FallbackHtmlRenderer: ginHtmlRenderer}
 
-	// Basic Route
-	r.GET("/ping", func(c *gin.Context) {
+	// Health
+	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
+			"detail": "healthy",
 		})
 	})
 
-	// Get something
-	r.GET("/hello", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "", views.Hello("Person"))
+	// Index
+	r.GET("/", func(c *gin.Context) {
+		database := database.NewDatabase()
+		games := database.GetAllGames()
+		c.HTML(http.StatusOK, "", views.Index(games))
 	})
 
 	return r
